@@ -33,7 +33,8 @@ def run_boostmonodepth(img_names, src_folder, depth_folder):
     os.system(f'cd {BOOST_BASE} && python run.py --Final --data_dir {BOOST_INPUTS}/  --output_dir {BOOST_OUTPUTS} --depthNet 0')
 
     for i, (img_name, tgt_name) in enumerate(zip(img_names, tgt_names)):
-        img = imageio.imread(img_name)
+        # img = imageio.imread(img_name)
+        img = Image.open(img_name)
         H, W = img.shape[:2]
         scale = 640. / max(H, W)
 
