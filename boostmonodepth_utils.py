@@ -1,8 +1,9 @@
 import os
 import cv2
 import glob
+from PIL import Image
 import numpy as np
-import imageio
+# import imageio
 from MiDaS.MiDaS_utils import write_depth
 
 BOOST_BASE = 'BoostingMonocularDepth'
@@ -38,8 +39,13 @@ def run_boostmonodepth(img_names, src_folder, depth_folder):
 
         # resize and save depth
         target_height, target_width = int(round(H * scale)), int(round(W * scale))
-        depth = imageio.imread(os.path.join(BOOST_BASE, BOOST_OUTPUTS, tgt_name))
+
+        image_path = os.path.join(BOOST_BASE, BOOST_OUTPUTS, tgt_name)
+        depth = Image.open(image_path)
         depth = np.array(depth).astype(np.float32)
+
+        # depth = imageio.imread(os.path.join(BOOST_BASE, BOOST_OUTPUTS, tgt_name))
+        # depth = np.array(depth).astype(np.float32)
         depth = resize_depth(depth, target_width, target_height)
         np.save(os.path.join(depth_folder, tgt_name.replace('.png', '.npy')), depth / 32768. - 1.)
         write_depth(os.path.join(depth_folder, tgt_name.replace('.png', '')), depth)

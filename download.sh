@@ -1,4 +1,15 @@
 #!/bin/sh
+# wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh
+# bash ~/Anaconda3-2021.11-Linux-x86_64.sh -b -p $HOME/anaconda
+# anaconda/bin/conda create -n 3DP python=3.8.10 anaconda -y
+# anaconda/bin/conda shell.bash activate 3DP
+
+# git clone https://github.com/landonfears/3d-photo-inpainting.git
+# cd 3d-photo-inpainting/
+# pip install -r requirements.txt
+
+# cd ..
+
 fb_status=$(wget --spider -S https://filebox.ece.vt.edu/ 2>&1 | grep  "HTTP/1.1 200 OK")
 
 mkdir checkpoints
